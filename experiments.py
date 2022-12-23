@@ -6,6 +6,8 @@ import pickle
 from scipy.signal import butter, lfilter
 from sklearn.svm import SVC
 
+from features.initial import initialize_features
+
 import random
 import os
 seed = 57
@@ -40,11 +42,15 @@ def main():
 
     x = np.concatenate((x_normal,x_seizure))
     y = np.concatenate((np.zeros((400,1)),np.ones((100,1))))
-
+    
     print(x.shape)
     print(y.shape)
 
-    x_train, x_test, y_train, y_test = train_test_split(x,y,random_state=seed,test_size=0.2)
+    x_features = initialize_features(x)
+
+    print(x_features.shape)
+
+    x_train, x_test, y_train, y_test = train_test_split(x_features,y,random_state=seed,test_size=0.2)
 
     print(x_test.shape)
 
@@ -54,3 +60,5 @@ def main():
     y_pred = clf.predict(x_test)
 
     print(accuracy_score(y_test,y_pred))
+
+main()
