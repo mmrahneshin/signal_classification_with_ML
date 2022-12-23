@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 import pickle
 from scipy.signal import butter, lfilter
 from sklearn.svm import SVC
+from decimal import *
 
 from features.initial import initialize_features
+from Kfold import K_fold
 
 import random
 import os
@@ -50,15 +52,26 @@ def main():
 
     print(x_features.shape)
 
-    x_train, x_test, y_train, y_test = train_test_split(x_features,y,random_state=seed,test_size=0.2)
+    train_index, test_index = K_fold(x_features, y, 5)
 
-    print(x_test.shape)
+    for train_i, test_i in zip(train_index,test_index):
 
-    clf = SVC(kernel='linear')
-    clf.fit(x_train, y_train)
+        x_train = x_features[train_i]
+        x_test = x_features[test_i]
+        y_train = y[train_i]
+        y_test = y[test_i]
 
-    y_pred = clf.predict(x_test)
+        print(x_test.shape)
 
-    print(accuracy_score(y_test,y_pred))
+        clf = SVC(kernel='linear')
+        clf.fit(x_train, y_train)
+
+        y_pred = clf.predict(x_test)
+
+        print(Decimal(accuracy_score(y_test,y_pred)))
+
+   
+
+   
 
 main()
