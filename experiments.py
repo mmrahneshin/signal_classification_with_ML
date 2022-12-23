@@ -1,13 +1,13 @@
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, recall_score, precision_score
 import matplotlib.pyplot as plt
 import pickle
 from scipy.signal import butter, lfilter
-from sklearn.svm import SVC
-from decimal import *
+
 
 from features.initial import initialize_features
+from classification.SVM import SVM
+from classification.KNN import KNN
+from classification.randomForest import random_forest
 from Kfold import K_fold
 
 import random
@@ -63,15 +63,8 @@ def main():
 
         print(x_test.shape)
 
-        clf = SVC(kernel='linear')
-        clf.fit(x_train, y_train)
-
-        y_pred = clf.predict(x_test)
-
-        print(Decimal(accuracy_score(y_test,y_pred)))
-
-   
-
-   
+        # SVM(x_train, y_train, x_test, y_test)
+        # KNN(x_train, y_train, x_test, y_test)
+        random_forest(x_train, y_train, x_test, y_test)
 
 main()
