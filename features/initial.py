@@ -1,7 +1,9 @@
 import numpy as np
+from scipy.fft import fft
 
 from features.statistical import *
 from features.timeDomain import *
+from features.frequencyDomain import *
 
 def initialize_features(dataset):
     features_dataset = []
@@ -9,21 +11,34 @@ def initialize_features(dataset):
         features = []
 
         # statistical --------------------------
-        features.append(maximum(data))
-        features.append(minimum(data))
-        features.append(mean(data))
-        features.append(variance(data))
-        features.append(deviation(data))
-        features.append(rms(data))
+        features.append(maximum(data))              #1
+        features.append(minimum(data))              #2
+        features.append(mean(data))                 #3
+        features.append(variance(data))             #4
+        features.append(deviation(data))            #5
+        features.append(rms(data))                  #6
         # statistical --------------------------
 
         # timeDomain --------------------------
-        features.append(min_max_distance(data))
-        features.append(skewness(data))
-        features.append(kurtosis_calc(data))
-        features.append(margin_factor(data))
-        features.append(crest_factor(data))
+        features.append(min_max_distance(data))     #7
+        features.append(skewness(data))             #8
+        features.append(kurtosis_calc(data))        #9
+        features.append(margin_factor(data))        #10
+        features.append(crest_factor(data))         #11
         # timeDomain --------------------------
+
+        # frequencyDomain --------------------------
+        ft = fft(data)
+        S = np.abs(ft**2)/len(data)
+
+        features.append(max_f(data))                #12
+        features.append(min_f(data))                #13
+        features.append(mean_f(data))               #14
+        features.append(var_f(data))                #15
+        features.append(margin_factor_f(data))      #16
+        features.append(peak_f(data))               #17
+        # frequencyDomain --------------------------
+
 
 
         features_dataset.append(features)
