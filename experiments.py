@@ -3,12 +3,14 @@ import matplotlib.pyplot as plt
 import pickle
 from scipy.signal import butter, lfilter
 
-
+from sklearn.preprocessing import StandardScaler
 from features.initial import initialize_features
 from classification.SVM import SVM
 from classification.KNN import KNN
 from classification.randomForest import random_forest
 from Kfold import K_fold
+from chart.confusionMatrix import confMatrix
+from chart.rocMatrix import roc_matrix
 
 import random
 import os
@@ -47,6 +49,11 @@ def main():
     
     print(x.shape)
     print(y.shape)
+    # standard--------------------------------------------
+    scaler = StandardScaler()
+    scaler.fit(x)
+    x = scaler.transform(x)
+    # standard--------------------------------------------
 
     x_features = initialize_features(x)
 
@@ -75,9 +82,9 @@ def main():
         clf_score_save.append([acc_score, clf, x_test, y_test])
 
     acc_score, clf, x_test, y_test = find_best(clf_score_save)
+    confMatrix(x_test, y_test, clf)
+    roc_matrix(x_test, y_test, clf)
 
-    
-    
 def find_best(data):
     best = None
     max = -1

@@ -1,6 +1,7 @@
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
-def confMatrix(y_test, y_pred, label):
-    cm = confusion_matrix(y_test, y_pred, labels=label)
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm,display_labels=label)
-    disp.plot()
+def confMatrix(x_test, y_test, clf):
+    print(clf)
+    ConfusionMatrixDisplay.from_estimator(clf, x_test, y_test)
+    plt.show()
