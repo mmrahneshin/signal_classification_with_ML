@@ -9,6 +9,12 @@ def KNN(x_train, y_train, x_test, y_test):
     neigh.fit(x_train, y_train)
     y_pred = neigh.predict(x_test)
 
-    print("accuracy score: ", Decimal(accuracy_score(y_test,y_pred)))
-    print("recall score: ", Decimal(recall_score(y_test,y_pred)))
-    print("precision score: ", Decimal(precision_score(y_test,y_pred)))
+    acc_score = accuracy_score(y_test,y_pred)
+    rec_score = recall_score(y_test,y_pred)
+    prec_score = precision_score(y_test,y_pred)
+
+    print("accuracy score: ", Decimal(acc_score))
+    print("recall score: ", Decimal(rec_score))
+    print("precision score: ", Decimal(prec_score))
+
+    return acc_score, neigh

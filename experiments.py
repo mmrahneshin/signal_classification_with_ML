@@ -52,7 +52,9 @@ def main():
 
     print(x_features.shape)
 
-    train_index, test_index = K_fold(x_features, y, 5)
+    train_index, test_index = K_fold(x_features, 5)
+
+    clf_score_save = []
 
     for train_i, test_i in zip(train_index,test_index):
 
@@ -63,8 +65,27 @@ def main():
 
         print(x_test.shape)
 
-        # SVM(x_train, y_train, x_test, y_test)
-        # KNN(x_train, y_train, x_test, y_test)
-        random_forest(x_train, y_train, x_test, y_test)
+        acc_score, clf = SVM(x_train, y_train, x_test, y_test)
+        clf_score_save.append([acc_score, clf, x_test, y_test])
+
+        acc_score, clf = KNN(x_train, y_train, x_test, y_test)
+        clf_score_save.append([acc_score, clf, x_test, y_test])
+
+        acc_score, clf = random_forest(x_train, y_train, x_test, y_test)
+        clf_score_save.append([acc_score, clf, x_test, y_test])
+
+    acc_score, clf, x_test, y_test = find_best(clf_score_save)
+
+    
+    
+def find_best(data):
+    best = None
+    max = -1
+    for node in data:
+        if node[0] > max:
+            best = node
+            max = node[0]
+
+    return best
 
 main()

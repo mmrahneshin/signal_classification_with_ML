@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.model_selection import KFold
 
-def K_fold(dataset, label, split):
+def K_fold(dataset, split):
     train_index=[]
     test_index=[]
     kf = KFold(n_splits = split, shuffle=True)
