@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def random_forest(x_train, y_train,x_test,y_test):
     
-    clf = RandomForestClassifier()
+    clf = RandomForestClassifier(criterion = "log_loss")
     clf.fit(x_train, y_train)
     y_pred = clf.predict(x_test)
 
@@ -12,8 +12,8 @@ def random_forest(x_train, y_train,x_test,y_test):
     rec_score = recall_score(y_test,y_pred)
     prec_score = precision_score(y_test,y_pred)
 
-    print("accuracy score: ", Decimal(acc_score))
-    print("recall score: ", Decimal(rec_score))
-    print("precision score: ", Decimal(prec_score))
+    print("accuracy score random-forest: ", acc_score)
+    print("recall score random-forest: ", rec_score)
+    print("precision score random-forest: ", prec_score)
 
     return acc_score, clf

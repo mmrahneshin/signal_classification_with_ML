@@ -16,7 +16,6 @@ import random
 import os
 seed = 57
 
-
 def main():
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
@@ -70,13 +69,11 @@ def main():
         y_train = y[train_i]
         y_test = y[test_i]
 
-        print(x_test.shape)
+        # acc_score, clf = SVM(x_train, y_train, x_test, y_test)
+        # clf_score_save.append([acc_score, clf, x_test, y_test])
 
-        acc_score, clf = SVM(x_train, y_train, x_test, y_test)
-        clf_score_save.append([acc_score, clf, x_test, y_test])
-
-        acc_score, clf = KNN(x_train, y_train, x_test, y_test)
-        clf_score_save.append([acc_score, clf, x_test, y_test])
+        # acc_score, clf = KNN(x_train, y_train, x_test, y_test)
+        # clf_score_save.append([acc_score, clf, x_test, y_test])
 
         acc_score, clf = random_forest(x_train, y_train, x_test, y_test)
         clf_score_save.append([acc_score, clf, x_test, y_test])
@@ -84,6 +81,7 @@ def main():
     acc_score, clf, x_test, y_test = find_best(clf_score_save)
     confMatrix(x_test, y_test, clf)
     roc_matrix(x_test, y_test, clf)
+
 
 def find_best(data):
     best = None

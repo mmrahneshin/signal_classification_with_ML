@@ -13,8 +13,8 @@ def KNN(x_train, y_train, x_test, y_test):
     rec_score = recall_score(y_test,y_pred)
     prec_score = precision_score(y_test,y_pred)
 
-    print("accuracy score: ", Decimal(acc_score))
-    print("recall score: ", Decimal(rec_score))
-    print("precision score: ", Decimal(prec_score))
+    print("accuracy score KNN: ", acc_score)
+    print("recall score KNN: ", rec_score)
+    print("precision score KNN: ", prec_score)
 
     return acc_score, neigh
