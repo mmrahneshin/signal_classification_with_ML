@@ -11,6 +11,7 @@ from classification.randomForest import random_forest
 from Kfold import K_fold
 from chart.confusionMatrix import confMatrix
 from chart.rocMatrix import roc_matrix
+from select_features.main import select_feature
 
 import random
 import os
@@ -54,33 +55,39 @@ def main():
     x = scaler.transform(x)
     # standard--------------------------------------------
 
+  
     x_features = initialize_features(x)
 
+  
     print(x_features.shape)
 
     train_index, test_index = K_fold(x_features, 5)
 
+    # phase 2 -----------------------------------------------
+    select_feature(x_features, y, train_index, test_index)
+    # phase 2 -----------------------------------------------
+
     clf_score_save = []
 
-    for train_i, test_i in zip(train_index,test_index):
+    # for train_i, test_i in zip(train_index,test_index):
 
-        x_train = x_features[train_i]
-        x_test = x_features[test_i]
-        y_train = y[train_i]
-        y_test = y[test_i]
+    #     x_train = x_features[train_i]
+    #     x_test = x_features[test_i]
+    #     y_train = y[train_i]
+    #     y_test = y[test_i]
 
-        # acc_score, clf = SVM(x_train, y_train, x_test, y_test)
-        # clf_score_save.append([acc_score, clf, x_test, y_test])
+    #     # acc_score, clf = SVM(x_train, y_train, x_test, y_test)
+    #     # clf_score_save.append([acc_score, clf, x_test, y_test])
 
-        # acc_score, clf = KNN(x_train, y_train, x_test, y_test)
-        # clf_score_save.append([acc_score, clf, x_test, y_test])
+    #     # acc_score, clf = KNN(x_train, y_train, x_test, y_test)
+    #     # clf_score_save.append([acc_score, clf, x_test, y_test])
 
-        acc_score, clf = random_forest(x_train, y_train, x_test, y_test)
-        clf_score_save.append([acc_score, clf, x_test, y_test])
+    #     acc_score, clf = random_forest(x_train, y_train, x_test, y_test)
+    #     clf_score_save.append([acc_score, clf, x_test, y_test])
 
-    acc_score, clf, x_test, y_test = find_best(clf_score_save)
-    confMatrix(x_test, y_test, clf)
-    roc_matrix(x_test, y_test, clf)
+    # acc_score, clf, x_test, y_test = find_best(clf_score_save)
+    # confMatrix(x_test, y_test, clf)
+    # roc_matrix(x_test, y_test, clf)
 
 
 def find_best(data):
