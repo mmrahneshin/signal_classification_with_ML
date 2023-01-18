@@ -31,12 +31,12 @@ def initialize_features(dataset):
         ft = fft(data)
         S = np.abs(ft**2)/len(data)
 
-        features.append(max_f(data))                #12
-        features.append(min_f(data))                #13
-        features.append(mean_f(data))               #14
-        features.append(var_f(data))                #15
-        features.append(margin_factor_f(data))      #16
-        features.append(peak_f(data))               #17
+        features.append(max_f(S))                #12
+        features.append(min_f(S))                #13
+        features.append(mean_f(S))               #14
+        features.append(var_f(S))                #15
+        features.append(margin_factor_f(S))      #16
+        features.append(peak_f(S))               #17
         # frequencyDomain --------------------------
 
 

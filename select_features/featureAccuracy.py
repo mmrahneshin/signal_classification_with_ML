@@ -5,8 +5,8 @@ from classification.ID3 import ID3
 
 def feature_accuracy(x, y, train_index, test_index):
     x_feature = x.T
-
     feature_score = []
+    
     for feature in x_feature:
         acc_score = []
         for train_i, test_i in zip(train_index,test_index):
