@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def random_forest(x_train, y_train,x_test,y_test):
     
-    clf = RandomForestClassifier(criterion = "log_loss")
+    clf = RandomForestClassifier()
     clf.fit(x_train, y_train)
     y_pred = clf.predict(x_test)
 
