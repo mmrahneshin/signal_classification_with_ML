@@ -1,5 +1,4 @@
 import numpy as np
-from sklearn.preprocessing import StandardScaler
 
 from select_features.featureAccuracy import feature_accuracy
 from select_features.correlation import correlation
@@ -20,7 +19,7 @@ def select_feature(x, y, train_index, test_index, count):
     # normalize -------------------------------------------
     
     # normalize -------------------------------------------
-    f1_score = (2 * feature_score) + (1 / mean_corr) / 3
+    f1_score = 2 * feature_score * (1 / mean_corr) / ((1 / mean_corr) + feature_score)
 
     feature_dict = dict()
     for name,f1 in zip(features_name, f1_score):
