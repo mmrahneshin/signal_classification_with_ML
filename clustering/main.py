@@ -7,14 +7,13 @@ from sklearn.metrics import accuracy_score, recall_score, precision_score
 
 from sklearn.cluster import KMeans
 
-def clustering(x, y):
-    number_of_cluster = 13
+def clustering(x, y, number_of_cluster):
     
     x_train ,x_test, y_train, y_test = train_test_split(x, y, test_size=0.2,
     random_state=57, shuffle=True)
 
     # test without clustering ---------------------------------------
-    clf = RandomForestClassifier()
+    clf = RandomForestClassifier( random_state=57)
     clf.fit(x_train, y_train.ravel())
     pred = clf.predict(x_test)
 
@@ -22,9 +21,9 @@ def clustering(x, y):
     rec_score = recall_score(y_test, pred)
     prec_score = precision_score(y_test, pred)
 
-    print("accuracy score KNN: ", acc_score)
-    print("recall score KNN: ", rec_score)
-    print("precision score KNN: ", prec_score)
+    print("accuracy score : ", acc_score)
+    print("recall score : ", rec_score)
+    print("precision score : ", prec_score)
     # test without clustering ---------------------------------------
 
     kmeans = KMeans(n_clusters=number_of_cluster, random_state=57).fit(x_train)
@@ -34,7 +33,7 @@ def clustering(x, y):
         data = x_train[kmeans.labels_ == i]
         label = y_train[kmeans.labels_ == i]
 
-        clf = RandomForestClassifier()
+        clf = RandomForestClassifier(random_state=57)
         clf.fit(data, label.ravel())
         cluster_classifier.append(clf)
 
@@ -50,6 +49,6 @@ def clustering(x, y):
     rec_score = recall_score(y_test, y_pred)
     prec_score = precision_score(y_test, y_pred)
 
-    print("accuracy score KNN: ", acc_score)
-    print("recall score KNN: ", rec_score)
-    print("precision score KNN: ", prec_score)
+    print("accuracy score : ", acc_score)
+    print("recall score : ", rec_score)
+    print("precision score : ", prec_score)

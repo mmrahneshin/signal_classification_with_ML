@@ -13,6 +13,7 @@ from chart.confusionMatrix import confMatrix
 from chart.rocMatrix import roc_matrix
 from select_features.main import select_feature
 from clustering.main import clustering
+from different_issue.main import diffrent_issues
 
 import random
 import os
@@ -65,8 +66,9 @@ def main():
     train_index, test_index = K_fold(x_features, 5)
 
     # phase 2 -----------------------------------------------
-    x_features = select_feature(x_features, y, train_index, test_index , 10)
-    clustering(x_features,y)
+    x_features = select_feature(x_features, y, train_index, test_index , 5)
+    clustering(x_features,y, 10)
+    diffrent_issues(x_features, y)
     # phase 2 -----------------------------------------------
 
     print(x_features.shape)
