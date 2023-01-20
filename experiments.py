@@ -66,8 +66,8 @@ def main():
     train_index, test_index = K_fold(x_features, 5)
 
     # phase 2 -----------------------------------------------
-    x_features = select_feature(x_features, y, train_index, test_index , 5)
-    clustering(x_features,y, 10)
+    selected_features = select_feature(x_features, y, train_index, test_index , 5)
+    clustering(selected_features,y, 10)
     diffrent_issues(x_features, y)
     # phase 2 -----------------------------------------------
 
