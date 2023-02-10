@@ -10,14 +10,14 @@ def load_normal(f_name):
     for i in np.arange(n):
         sigbufs[i, :] = f.readSignal(i)
 
-    label = np.zeros((648,1))
+    label = np.zeros((int((f.getNSamples()[0]/256) - (f.getNSamples()[0]/256)/10 - 5), 1))
 
     data = []
     sigbufs = sigbufs[16:18]
     for chanel in sigbufs:
         data_chanel = []
-        for i in range(36,684):
-            data_chanel.append(chanel[i*1280:(i+1)*1280])
+        for i in range(int((f.getNSamples()[0]/256)/20) , int((f.getNSamples()[0]/256) - (f.getNSamples()[0]/256)/20 - 5)):
+            data_chanel.append(chanel[i*256:(i+5)*256])
         data_chanel = np.array(data_chanel)
         data.append(data_chanel)
 
