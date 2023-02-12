@@ -43,7 +43,7 @@ def cnn1(data, label):
     print(x_train.shape, x_features_train.shape, y_train_cat.shape)
     print(np.sum(y_test), np.sum(y_train))
 
-    EPOCHS = 1
+    EPOCHS = 5
     input_size = [data.shape[1], data.shape[2]]
 
 

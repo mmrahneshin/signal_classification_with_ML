@@ -16,11 +16,11 @@ def main():
     data, label = data_preparation()
     print(data.shape, label.shape)
     
-    cnn1(data,label)
+    # cnn1(data,label)
 
     # cnn2(data, label)
 
-    # cnn3(data, label)
+    cnn3(data, label)
 
 
 main()
