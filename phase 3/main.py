@@ -1,7 +1,7 @@
 import numpy as np
 
 from data_preparation.data_preparation import data_preparation
-from cnn.cnn import cnn
+from cnn.cnn import cnn1,cnn2,cnn3
 
 import random
 import os
@@ -16,6 +16,11 @@ def main():
     data, label = data_preparation()
     print(data.shape, label.shape)
     
-    cnn(data,label)
+    cnn1(data,label)
+
+    # cnn2(data, label)
+
+    # cnn3(data, label)
+
 
 main()
